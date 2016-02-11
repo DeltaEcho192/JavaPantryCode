@@ -1,0 +1,45 @@
+       int test=0;
+        //If you want to add an ite you press 0 if you want to delete and item you press 1
+        test=Integer.parseInt(JOptionPane.showInputDialog("Press 0 to Add Item, Press 1 to delete a Product"));
+        
+        if (test==0)
+        {
+
+        
+        try {
+           Class.forName("com.mysql.jdbc.Driver");
+
+            // connect way #1
+
+            String url = "jdbc:mysql://192.168.77.25:3306/products";
+            String user = "test1";
+            String password = "connect";
+            int barcode1=0;
+       
+
+            barcode1=Integer.parseInt(JOptionPane.showInputDialog("Enter Barcode"));
+
+            
+     Connection Conn = DriverManager.getConnection(url, user, password);
+            Statement stmt = Conn.createStatement();
+            ResultSet rs;
+                
+            //Select code to Find the barcode where the product id is 1
+            rs = stmt.executeQuery("SELECT product_ID FROM product WHERE barcode = "+ barcode1);
+            while ( rs.next() ) {
+            String barcode = rs.getString("product_ID");
+                System.out.println(barcode);
+            }
+            Conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        }
+        else
+        {
+        System.out.println("Sorry for the incovinence it is not avalible");
+        }
+    }
+}
+
