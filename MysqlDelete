@@ -1,0 +1,33 @@
+    public static void main(String[] args) 
+    {
+    try 
+ {  
+     Class.forName("com.mysql.jdbc.Driver");
+
+            // connect way #1
+
+            String url = "jdbc:mysql://192.168.77.25:3306/products";
+            String user = "test1";
+            String password = "connect";
+            int barcode1=0;
+       
+
+            barcode1=Integer.parseInt(JOptionPane.showInputDialog("Enter Barcode"));
+
+            
+     Connection Conn = DriverManager.getConnection(url, user, password);
+            Statement stmt = Conn.createStatement();
+            ResultSet rs;
+    
+PreparedStatement st = Conn.prepareStatement("DELETE FROM product WHERE barcode = "+ barcode1);
+st.setInt(1,barcode1);
+st.executeUpdate(); 
+
+ }
+ catch(Exception e)
+ {
+     System.out.println(e);
+ }  
+    }
+    
+}
